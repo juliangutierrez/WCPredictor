@@ -19,8 +19,11 @@ ActiveRecord::Schema.define(version: 20140607225106) do
   end
 
   create_table "games", force: true do |t|
-    t.integer  "score_team_1"
-    t.integer  "score_team_2"
+    t.integer  "score_team1"
+    t.integer  "score_team2"
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.integer  "bet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140607225106) do
 
   create_table "users", force: true do |t|
     t.string   "name"
+    t.integer  "bet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

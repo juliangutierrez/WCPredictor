@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  post 'bet/create'
+
   get 'user/index'
+  post 'user/create'
 
   get 'bet/new'
+  get 'bet/:id' => 'bet#show', as: :bet
   get 'home/index'
   get 'user/new'
 

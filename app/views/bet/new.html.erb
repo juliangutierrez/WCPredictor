@@ -1,0 +1,30 @@
+<%= form_for :bet, url: bet_create_path do |bet_form| %>
+  <% if @bet.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@bet.errors.count, "error") %> prohibited
+      this bet from being saved:</h2>
+    <ul>
+    <% @bet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <% @bet.games.each_with_index do |game, index| %>
+    <%= bet_form.fields_for "games_attributes[#{index + 1}]", game do |games_form| %>
+    <div>
+       <p> 
+          <%= games_form.hidden_field(:team1)%>
+          <%= games_form.label game.team1.name %>
+          <%= games_form.text_field :score_team1 %>
+          <%= games_form.hidden_field(:team2)%>
+          <%= games_form.label game.team2.name %>
+          <%= games_form.text_field :score_team2 %>
+        </p>
+    <% end %>   
+  <% end %>   
+  <p>
+    <%= bet_form.submit %>
+  </p>
+<% end %>

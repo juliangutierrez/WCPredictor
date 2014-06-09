@@ -4,14 +4,13 @@ class UserController < ApplicationController
   end
 
   def create
-	  @user = User.new(article_params)
-	 
+	  @user = User.new(user_params)	
 	  @user.save
 	  redirect_to bet_new_path
 	end
 
 	private
-  def article_params
+  def user_params
     params.require(:user).permit(:name)
   end
 end
