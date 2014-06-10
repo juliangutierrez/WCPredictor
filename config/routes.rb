@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  post 'bet/create'
+  root 'users#new'  
+  resources :users
 
-  get 'user/index'
-  post 'user/create'
-
-  get 'bet/new'
-  get 'bet/:id' => 'bet#show', as: :bet
   get 'home/index'
-  get 'user/new'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

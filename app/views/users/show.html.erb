@@ -1,0 +1,7 @@
+<%= @user.name %>
+<% @user.bets.each do |bet| %>	
+	<%= bet.game.team1.name %>
+	<%= bet.score_team1 %>
+	<%= bet.game.team2.name %>
+	<%= bet.score_team2 %>
+<% end %>

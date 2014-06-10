@@ -1,10 +1,7 @@
 class Game < ActiveRecord::Base
 	belongs_to :team1, class_name: 'Team', foreign_key: 'team1_id'
 	belongs_to :team2, class_name: 'Team', foreign_key: 'team2_id'
-	belongs_to :bet
 
-	validates :score_team1, presence: true
-	validates :score_team2, presence: true
 
 	def self.games group
 		teams = Team.send("group_#{group}").to_a
@@ -22,4 +19,8 @@ class Game < ActiveRecord::Base
   	end
   	result
   end
+
+  def self.stage stage_number
+		Game.where(stage: stage_number) 
+	end
 end
