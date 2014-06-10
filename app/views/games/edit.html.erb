@@ -1,0 +1,10 @@
+<%= form_for :game, url: game_path(@game), method: :patch do |game_form| %>
+  <%= game_form.hidden_field(:id)%>
+  <%= game_form.label @game.team1.name %>
+  <%= game_form.text_field :actual_score_team1 %>          
+  <%= game_form.label @game.team2.name %>
+  <%= game_form.text_field :actual_score_team2 %>
+ <p>
+    <%= game_form.submit %>
+  </p>
+<% end %>
