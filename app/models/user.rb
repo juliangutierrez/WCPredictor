@@ -18,12 +18,12 @@ class User < ActiveRecord::Base
 		points = points + 2 if guess_score?(bet, game) 
 	end
 
-	def guess_outcome? bet, game
-		if (bet.winner == game.winner ||  bet.winner.nil? && game.winner.nil?)? return true : return false
+	def guess_outcome?(bet, game)
+		(bet.winner == game.winner ||  bet.winner.nil? && game.winner.nil?)? true : false
 	end
 
-	def guess_score? bet, game
-		if (bet.score_team1 == game.actual_score_team1 && bet.score_team2 == game.actual_score_team2)? return true : return false
+	def guess_score?(bet, game)
+		(bet.score_team1 == game.actual_score_team1 && bet.score_team2 == game.actual_score_team2)? true : false
 	end
 
 	def self.update_points game
