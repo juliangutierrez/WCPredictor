@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+.group-table {
+	width: 570px;
+	margin-right: 30px;
+	margin-left: 30px;	
+}
+
+.select-score {
+	width: 50px;
+}
+
+.label-center {
+	text-align: center
+}
+
+.img-right {
+	text-align: right;
+}
+
+.img-left {
+	text-align: left;
+}

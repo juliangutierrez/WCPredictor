@@ -1,4 +1,4 @@
-<%= form_for :user, url: user_path(@user), method: :patch do |user_form| %>
+<%= form_for :user, url: user_path(@user), method: :patch, html: {class: "form-inline"} do |user_form| %>
   <%= user_form.hidden_field(:id)%>
   <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -12,19 +12,81 @@
   </div>
   <% end %>
   
-  <% @user.bets.each_with_index do |bet, index| %>    
-    <%= user_form.fields_for "bets_attributes[#{index + 1}]", bet do |bets_form| %>
-    <div>
-       <p> 
+  <% games_number = 0%>
+  <% @user.bets.each do |bet| %>
+    <% if games_number % 6 == 0  %>
+      <div class="pull-left group-table"><table class='table'>  
+        <thead>
+          <tr>
+            <th colspan="4"><h4 class="text-center">Grupo <%= bet.game.team1.group %></h4></th>
+          </tr>
+        </thead>
+        <tbody>               
+    <% end %> 
+      <tr>
+        <%= user_form.fields_for "bets_attributes[]", bet do |bets_form| %>
+          <%= bets_form.hidden_field(:id, value: bet.id)%>               
           <%= bets_form.hidden_field(:game_id, value: bet.game.id)%>
-          <%= bets_form.label bet.game.team1.name %>
-          <%= bets_form.text_field :score_team1 %>          
-          <%= bets_form.label bet.game.team2.name %>
-          <%= bets_form.text_field :score_team2 %>
-        </p>
+          <td class='img-right'>
+            <%= image_tag("#{bet.game.team1.img}.png")%>
+          </td>
+          <td class='label-center'>
+            <%= bets_form.label bet.game.team1.name %>
+          </td>
+          <td>
+          <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score'} %> 
+          X  
+          <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score'} %>
+          </td>
+          <td class='label-center'>
+            <%= bets_form.label bet.game.team2.name %>
+          </td>
+          <td class='img-left'>
+            <%= image_tag("#{bet.game.team2.img}.png")%>
+          </td>       
+        <% end %>
+      </tr> 
+    <% games_number = games_number + 1 %>  
+    <% if games_number % 6 == 0  %>          
+      </tbody></table></div>
     <% end %>   
-  <% end %>   
-  <p>
-    <%= user_form.submit %>
-  </p>
+  <% end %>
+
+  <div class="pull-left group-table" align='center'>
+    <div class="control-group">
+      <label class="control-label"><h3>Campeão</h3></label>
+        <div class="controls">
+          <%= user_form.select :champion_id, Team.all.collect {|team| [ team.name, team.id ] }  %>
+        </div>
+        <div class="control-group">
+         <label class="control-label"><h3>Artilheiro</h3></label>
+        <div class="controls">
+          <%= user_form.text_field :striker %>          
+        </div>
+      </div>
+    </div>
+  </div>     
+     
+  <div class='clearfix'></div>
+  <div align='right'>
+    <a href="#myModal" role="button" class="btn large-button" data-toggle="modal">Regras</a>
+    <%= user_form.submit 'Salvar', class: "btn btn-primary large-button" %>
+  </div>
+  
 <% end %>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Regras</h3>
+  </div>
+  <div class="modal-body">
+    <ol>
+      <li>Para cada <strong>resultado</strong> acertado, você ganhará 3 pontos.</li>
+      <li>Para cada <strong>placar</strong> acertado, você ganhará 5 pontos.</li>
+      <li>Acertando o campeão você ganhará 10 pontos extras.</li>
+      <li>Acertando o artilheiro você ganhará 10 pontos extras.</li>
+    </ol>    
+  </div>
+</div>

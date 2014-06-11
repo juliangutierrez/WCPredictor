@@ -1,6 +1,6 @@
 class Bet < ActiveRecord::Base
 	belongs_to :game
-
+	
 	def winner
 		return game.team1 if team1_won?
 		return game.team2 if team2_won?		
