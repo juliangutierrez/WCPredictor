@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root 'users#new'  
   resources :users
-  resources :games
+  resources :games do
+    collection do
+      get 'list'
+    end
+  end
 
   get 'home/index'
   

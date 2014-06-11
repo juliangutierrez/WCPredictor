@@ -1,0 +1,20 @@
+<table class="table">
+	<thead>
+    <tr>
+      <th>#id</th>
+      <th>Jogo</th>
+      <th>Preenchido</th>
+    </tr>
+  </thead>
+  <tbody>    
+    	<% @games.each do |game| %>
+	    	<tr>
+					<td><%= game.id %></td>
+					<td><%= game.done?? game.label : link_to(game.label, edit_game_path(game)) %></td>
+					<td><%= game.done?? "OK" : "-" %></td>
+				</tr>
+			<% end %>    
+  </tbody>
+	
+	
+</table>

@@ -16,12 +16,16 @@ class User < ActiveRecord::Base
 	end
 	
 	def update_points game
-		bet = bets.find(game: game)
+		bet = bets.where(game: game).first
 		new_points = points.last
 		new_points = new_points + 3 if guess_outcome?(bet, game)
 		new_points = new_points + 2 if guess_score?(bet, game)
 		points << new_points
 		save
+	end
+
+	def current_points
+		points.last
 	end
 
 	def guess_outcome?(bet, game)
@@ -36,5 +40,9 @@ class User < ActiveRecord::Base
 		User.all.each do |user|
 			user.update_points game
 		end
+	end
+
+	def self.sorted	
+		User.all.sort_by(&:current_points).reverse
 	end
 end

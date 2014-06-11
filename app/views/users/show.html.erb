@@ -1,7 +1,46 @@
-<%= @user.name %>
-<% @user.bets.each do |bet| %>	
-	<%= bet.game.team1.name %>
-	<%= bet.score_team1 %>
-	<%= bet.game.team2.name %>
-	<%= bet.score_team2 %>
+<% games_number = 0%>
+<% @user.bets.each do |bet| %>
+  <% if games_number % 6 == 0  %>
+    <div class="pull-left group-table"><table class='table'>  
+      <thead>
+        <tr>
+          <th colspan="4"><h4 class="text-center">Grupo <%= bet.game.team1.group %></h4></th>
+        </tr>
+      </thead>
+      <tbody>               
+  <% end %> 
+    <tr>      
+      <td class='img-right'>
+        <%= image_tag("#{bet.game.team1.img}.png")%>
+      </td>
+      <td class='label-center'>
+        <%= label_tag bet.game.team1.name %>
+      </td>
+      <td>
+      
+      <%= bet.score_team1%> 
+      X  
+      <%= bet.score_team2 %> 
+      </td>
+      <td class='label-center'>        
+        <%= label_tag bet.game.team2.name %>
+      </td>
+      <td class='img-left'>
+        <%= image_tag("#{bet.game.team2.img}.png")%>
+      </td>     
+    </tr> 
+  <% games_number = games_number + 1 %>  
+  <% if games_number % 6 == 0  %>          
+    </tbody></table></div>
+  <% end %>   
 <% end %>
+
+<div class="pull-left group-table" align='center'> 
+  <h3>Campeão</h3>  
+  <%= image_tag("#{@user.champion.img}.png") %>
+  <h4 class="muted"><%= @user.champion.name %></h4>
+  <h3>Artilheiro</h3>
+  <h4 class="muted"><%= @user.striker %></h4>
+  <h3>Pontos</h3>  
+  <h4 class="muted"><%= @user.points.last %></h4> 
+</div>   

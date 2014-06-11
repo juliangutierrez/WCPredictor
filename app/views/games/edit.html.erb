@@ -1,11 +1,30 @@
-# encoding: utf-8
 <%= form_for :game, url: game_path(@game), method: :patch do |game_form| %>
-  <%= game_form.hidden_field(:id)%>
-  <%= game_form.label @game.team1.name.force_encoding("utf-8") %>
-  <%= game_form.text_field :actual_score_team1 %>          
-  <%= game_form.label @game.team2.name.force_encoding("utf-8") %>
-  <%= game_form.text_field :actual_score_team2 %>
- <p>
-    <%= game_form.submit %>
-  </p>
+<div class="pull-left group-table">
+	<table class='table'>
+		<tr>		  
+	  	<%= game_form.hidden_field(:id)%>
+	    <td class='img-right'>
+	      <%= image_tag("#{@game.team1.img}.png")%>
+	    </td>
+	    <td class='label-center'>	      
+	      <%= game_form.label @game.team1.name %>
+	    </td>
+	    <td>
+	    <%= game_form.select :actual_score_team1, (0..9).to_a, {}, {class: 'select-score'} %> 
+	    X  
+	    <%= game_form.select :actual_score_team2, (0..9).to_a, {}, {class: 'select-score'} %>
+	    </td>
+	    <td class='label-center'>
+	      <%= game_form.label @game.team2.name %>
+	    </td>
+	    <td class='img-left'>
+	      <%= image_tag("#{@game.team2.img}.png")%>
+	    </td>		  
+		</tr>
+	</table>
+	
+</div>
+<p>
+  <%= game_form.submit 'Salvar', class: "btn btn-primary large-button" %>
+</p>
 <% end %>

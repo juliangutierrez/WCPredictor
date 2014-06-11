@@ -7,6 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <p class="brand"><strong>Bolão Campeão</strong></p>
+    <ul class="nav">
+      <li><%= link_to 'Novo Usuário', new_user_path %></li>
+      <li><%= link_to 'Placar', users_path %></li>
+      <li><%= link_to 'Resultados', games_path %></li>     
+    </ul>
+    <div class='text-right' >
+    	<%= image_tag 'Fifa.png', size: '50'%>
+    </div>    
+  </div>
+</div>
 
 <%= yield %>
 

@@ -2,6 +2,10 @@ class GamesController < ApplicationController
 	def index
 		@games = Game.all
 	end
+
+	def list
+		@games = Game.all
+	end
 	
 	def edit
 		@game = Game.find(params[:id])
@@ -9,8 +13,8 @@ class GamesController < ApplicationController
 	
 	def update
 		@game = Game.find(params[:game][:id])		
-		@game.update(user_params)
-	  redirect_to @games
+		@game.update(game_params)
+	  redirect_to games_path
 	end
 
 	private

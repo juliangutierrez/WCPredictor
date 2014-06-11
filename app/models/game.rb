@@ -29,6 +29,13 @@ class Game < ActiveRecord::Base
 		actual_score_team1 < actual_score_team2
 	end
 
+	def score_team1
+		actual_score_team1.present?? actual_score_team1 : '-'
+	end
+
+	def score_team2
+		actual_score_team2.present?? actual_score_team2 : '-'
+	end
 	
 	def self.groups_stage
 		result = []

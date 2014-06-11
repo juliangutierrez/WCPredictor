@@ -1,0 +1,26 @@
+<table class='table table-hover score' align='center'> 
+	<thead>
+		<tr>
+			<th>Posição</th>
+			<th>Nome</th>
+			<th>Pontos</th>
+			<th>Ver aposta</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each_with_index do |user, index| %>			
+			<tr>
+				<% if rowspan? @users, index %>
+					<td rowspan=<%= row_span_for_score_table(@users, user.current_points) %>><%= index + 1 %></td>
+				<% end %>
+				<td><%= user.name %></td>
+				<td><%= user.points.last %></td>				
+				<td><%= link_to '', user_path(user), class: 'icon-eye-open' %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<div align='center'>
+	<%= image_tag("wc.png", size: '250')%>
+</div>
