@@ -37,8 +37,8 @@
 
 <div class="pull-left group-table" align='center'> 
   <h3>Campeão</h3> 
-  <%= image_tag("#{@user.champion.img}.png") if @user.champion.is present?%>
-  <h4 class="muted"><%= @user.champion.name %></h4>
+  <%= image_tag("#{@user.champion.img}.png") if @user.champion.present?%>
+  <h4 class="muted"><%= @user.champion.name if @user.champion.present?%></h4>
   <h3>Artilheiro</h3>
   <h4 class="muted"><%= @user.striker %></h4>
   <h3>Pontos</h3>  
