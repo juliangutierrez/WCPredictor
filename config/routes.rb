@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'users#new'  
-  resources :users
+  resources :users , except: :edit
   resources :games do
     collection do
       get 'list'

@@ -45,4 +45,22 @@ class User < ActiveRecord::Base
 	def self.sorted	
 		User.all.sort_by(&:current_points).reverse
 	end
+
+	def self.build_chart
+		LazyHighCharts::HighChart.new('graph') do |f|
+		  f.title(:text => "Bolão campeão")
+		  f.xAxis(:categories => Game.rounds)
+		  f.series(:name => "Pontos", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
+		  f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
+
+		  f.yAxis [
+		    {:title => {:text => "GDP in Billions", :margin => 70} },
+		    {:title => {:text => "Population in Millions"}, :opposite => true},
+		  ]
+
+		  f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
+		  f.chart({:defaultSeriesType=>"column"})
+		end
+	end
+	
 end

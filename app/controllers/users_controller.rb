@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users= User.sorted
+		@chart = User.build_chart
 	end
 
   def new
