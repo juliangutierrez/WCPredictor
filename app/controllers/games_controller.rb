@@ -4,7 +4,7 @@ class GamesController < ApplicationController
 	end
 
 	def list
-		@games = Game.all
+		@games = Game.order(:number)
 	end
 
 	def show
