@@ -55,4 +55,8 @@ class Game < ActiveRecord::Base
 		  result
 		end
 	end
+
+	def self.done_count
+		Game.all.map(&:done?).count {|game| game}
+	end
 end

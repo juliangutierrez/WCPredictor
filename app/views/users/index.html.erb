@@ -2,8 +2,12 @@
 	<thead>
 		<tr>
 			<th><p>Posição</p></th>
-			<th><p>Nome</p></th>
-			<th><p>Pontos</p></th>
+			<th><p class='text-center'>Nome</p></th>
+			<th><p class='text-center'>Pontos</p></th>
+			<th><p class='text-center'>Resultados</p></th>
+			<th><p class='text-center'>%</p></th>
+			<th><p class='text-center'>Placares</p></th>
+			<th><p class='text-center'>%</p></th>
 			<th><p class='text-center'>Ver aposta</p></th>
 		</tr>
 	</thead>
@@ -14,7 +18,11 @@
 					<td rowspan=<%= row_span_for_score_table(@users, user.current_points) %>><%= index + 1 %></td>
 				<% end %>
 				<td><%= user.name %></td>
-				<td><%= user.points.last %></td>				
+				<td><p class='text-center'><%= user.points.last %></p></td>
+				<td><p class='text-center'><%= user.correct_outcomes %></p></td>
+				<td><p class='text-center'><%= "#{user.correct_outcomes_percent.round(2) * 100}%" %></p></td>
+				<td><p class='text-center'><%= user.correct_scores %></p></td>				
+				<td><p class='text-center'><%= "#{user.correct_scores_percent.round(2) * 100}%" %></p></td>		
 				<td>
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
 				</td>

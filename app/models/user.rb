@@ -18,9 +18,16 @@ class User < ActiveRecord::Base
 	def update_points game
 		bet = bets.where(game: game).first
 		new_points = points.last
-		new_points = new_points + 3 if guess_outcome?(bet, game)
-		new_points = new_points + 2 if guess_score?(bet, game)
+		if guess_outcome?(bet, game)
+			new_points = new_points + 3
+			correct_outcomes = correct_outcomes + 1 unless !guess_score?
+		end
+		if guess_score?(bet, game)
+			new_points = new_points + 2
+			correct_scores = correct_scores + 1
+		end
 		points << new_points
+
 		save
 	end
 
@@ -34,6 +41,14 @@ class User < ActiveRecord::Base
 
 	def guess_score?(bet, game)
 		(bet.score_team1 == game.actual_score_team1 && bet.score_team2 == game.actual_score_team2)? true : false
+	end
+
+	def correct_outcomes_percent
+		correct_outcomes.to_f / Game.done_count
+	end
+
+	def correct_scores_percent
+		correct_scores.to_f / Game.done_count
 	end
 
 	def self.update_points game
