@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
 	def index
-		@users= User.sorted
+		@users = User.sorted
+		@games = Game.order :number
 		@chart = User.build_chart
 	end
 

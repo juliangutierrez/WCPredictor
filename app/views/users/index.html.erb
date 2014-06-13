@@ -31,6 +31,24 @@
 	</tbody>
 </table>
 
+<div class='text-center'>
+	<h5><strong>Próximos Jogos:</strong></h5>
+	<ul class="inline">
+	  <li><%= link_to @games[Game.done_count].label, game_path(@games[Game.done_count]) unless Game.done_count > Game.count %></li>
+	  <li><%= link_to @games[Game.done_count + 1].label, game_path(@games[Game.done_count + 1]) unless Game.done_count + 1 > Game.count %>
+</li>
+	  <li><%= link_to @games[Game.done_count + 2].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 2 > Game.count %>
+</li>
+	</ul>
+	
+	<h5><strong>Últimos Jogos:</strong></h5>
+	<ul class="inline">
+	  <li><%= link_to @games[Game.done_count - 1].label, game_path(@games[Game.done_count - 1])%></li>
+	  <li><%= link_to @games[Game.done_count - 2].label, game_path(@games[Game.done_count - 2])%></li>
+	  <li><%= link_to @games[Game.done_count - 3].label, game_path(@games[Game.done_count - 3])%></li>
+	</ul>
+</div>
+<br>
 <div align='center'>
 	<%= image_tag("wc.png", size: '250')%>
 </div>
