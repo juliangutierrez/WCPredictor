@@ -20,9 +20,9 @@
 				<td><%= user.name %></td>
 				<td><p class='text-center'><%= user.points.last %></p></td>
 				<td><p class='text-center'><%= user.correct_outcomes %></p></td>
-				<td><p class='text-center'><%= "#{user.correct_outcomes_percent.round(2) * 100}%" %></p></td>
-				<td><p class='text-center'><%= user.correct_scores %></p></td>				
-				<td><p class='text-center'><%= "#{user.correct_scores_percent.round(2) * 100}%" %></p></td>		
+				<td><p class='text-center'><%= (user.correct_outcomes_percent * 100).round 2 %>%</p></td>
+				<td><p class='text-center'><%= user.correct_scores %></p></td>
+				<td><p class='text-center'><%= (user.correct_scores_percent * 100).round 2 %>%</p></td>
 				<td>
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
 				</td>

@@ -20,11 +20,12 @@ class User < ActiveRecord::Base
 		new_points = points.last
 		if guess_outcome?(bet, game)
 			new_points = new_points + 3
-			correct_outcomes = correct_outcomes + 1 unless !guess_score?
+			binding.pry
+			self.correct_outcomes = self.correct_outcomes + 1 unless !guess_score?(bet,game)
 		end
 		if guess_score?(bet, game)
 			new_points = new_points + 2
-			correct_scores = correct_scores + 1
+			self.correct_scores = self.correct_scores + 1
 		end
 		points << new_points
 
