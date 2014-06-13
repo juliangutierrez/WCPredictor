@@ -1,0 +1,33 @@
+<table class='table show-table' align='center'>  
+  <thead>
+    <tr>
+      <th><p>Nome</p></th>
+      <th colspan='4'><p class='text-center'> Aposta </p></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>                 
+			<tr>
+				<td><%= user.name %></td>
+			  <td class='img-right'>
+			    <%= image_tag("#{@game.team1.img}.png")%>
+			  </td>
+			  <td class='label-center'>
+			    <%= label_tag @game.team1.name %>
+			  </td>
+			  <td>      
+			  <%= user.bets.find_by_game_id(@game.id).score_team1 %> 
+			  X  
+			  <%= user.bets.find_by_game_id(@game.id).score_team2 %> 
+			  </td>
+			  <td class='label-center'>        
+			    <%= label_tag @game.team2.name %>
+			  </td>
+			  <td class='img-left'>
+			    <%= image_tag("#{@game.team2.img}.png")%>
+			  </td>     
+			</tr>
+		<% end %>      
+  </tbody>
+</table>
+

@@ -6,7 +6,12 @@ class GamesController < ApplicationController
 	def list
 		@games = Game.all
 	end
-	
+
+	def show
+		@users = User.all
+		@game = Game.find(params[:id])
+	end
+
 	def edit
 		@game = Game.find(params[:id])
 	end
