@@ -15,7 +15,9 @@
 				<% end %>
 				<td><%= user.name %></td>
 				<td><%= user.points.last %></td>				
-				<td><%= link_to '', user_path(user), class: 'icon-eye-open' %></td>
+				<td>
+					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

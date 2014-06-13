@@ -4,7 +4,8 @@
     <div class="pull-left group-table"><table class='table'>  
       <thead>
         <tr>
-          <th colspan="4"><h4 class="text-center">Grupo <%= game.team1.group %></h4></th>
+          <th colspan="5"><p class="text-center">Grupo <%= game.team1.group %></p></th>
+          <th><p class="text-center">Apostas</p></th>
         </tr>
       </thead>
       <tbody>               
@@ -16,8 +17,7 @@
       <td class='label-center'>
         <%= label_tag game.team1.name %>
       </td>
-      <td>
-      
+      <td>      
       <%= game.score_team1%> 
       X  
       <%= game.score_team2 %> 
@@ -27,7 +27,10 @@
       </td>
       <td class='img-left'>
         <%= image_tag("#{game.team2.img}.png")%>
-      </td>     
+      </td>
+      <td>
+        <p class='text-center'><%= link_to '', game_path(game), class: 'icon-eye-open' %></p>
+      </td>  
     </tr> 
   <% games_number = games_number + 1 %>  
   <% if games_number % 6 == 0  %>          
