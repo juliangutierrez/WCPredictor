@@ -50,7 +50,7 @@ class Game < ActiveRecord::Base
 	end
 
 	def self.rounds		
-		Game.all.inject([0]) do |result, game|
+		Game.all.inject([1]) do |result, game|
 		  result << result.last + 1 if game.done?
 		  result
 		end
