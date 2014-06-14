@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	def index
 		@users = User.sorted
 		@games = Game.order :number
-		@chart = User.build_chart
+		@series = User.build_chart_series
 	end
 
   def new
