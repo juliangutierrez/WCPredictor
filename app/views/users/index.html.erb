@@ -18,7 +18,7 @@
 					<td rowspan=<%= row_span_for_score_table(@users, user.current_points) %>><%= index + 1 %></td>
 				<% end %>
 				<td><%= user.name %></td>
-				<td><p class='text-center'><%= user.points.last %></p></td>
+				<td><p class='text-center'><strong><%= user.points.last %></strong></p></td>
 				<td><p class='text-center'><%= user.correct_outcomes %></p></td>
 				<td><p class='text-center'><%= (user.correct_outcomes_percent * 100).round 2 %>%</p></td>
 				<td><p class='text-center'><%= user.correct_scores %></p></td>
@@ -43,6 +43,8 @@
 </li>
 	  <li><%= link_to @games[Game.done_count + 2].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 2 > Game.count %>
 </li>
+		<li><%= link_to @games[Game.done_count + 3].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 3 > Game.count %>
+</li>
 	</ul>
 	
 	<h5><strong>Últimos Jogos:</strong></h5>
@@ -50,6 +52,7 @@
 	  <li><%= link_to @games[Game.done_count - 1].label, game_path(@games[Game.done_count - 1])%></li>
 	  <li><%= link_to @games[Game.done_count - 2].label, game_path(@games[Game.done_count - 2])%></li>
 	  <li><%= link_to @games[Game.done_count - 3].label, game_path(@games[Game.done_count - 3])%></li>
+	  <li><%= link_to @games[Game.done_count - 4].label, game_path(@games[Game.done_count - 4])%></li>
 	</ul>
 </div>
 <br>
