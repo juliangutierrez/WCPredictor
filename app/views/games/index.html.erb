@@ -1,48 +1,45 @@
-<% games_number = 0%>
-<% @games.each do |game| %>
-  <% if games_number % 6 == 0  %>
-    <div class="pull-left group-table"><table class='table'>  
+<% (0..7).each do |index| %>
+  <div class="pull-left group-table">
+    <table class='table'>  
       <thead>
         <tr>
-          <th colspan="5"><p class="text-center">Grupo <%= game.team1.group %></p></th>
+          <th colspan="5"><p class="text-center">Grupo <%= @games[6 * index].team1.group %></p></th>
           <th><p class="text-center">Apostas</p></th>
         </tr>
       </thead>
-      <tbody>               
-  <% end %> 
-    <tr>      
-      <td class='img-right'>
-        <%= image_tag("#{game.team1.img}.png")%>
-      </td>
-      <td class='label-center'>
-        <%= label_tag game.team1.name %>
-      </td>
-      <td>      
-      <%= game.score_team1%> 
-      X  
-      <%= game.score_team2 %> 
-      </td>
-      <td class='label-center'>        
-        <%= label_tag game.team2.name %>
-      </td>
-      <td class='img-left'>
-        <%= image_tag("#{game.team2.img}.png")%>
-      </td>
-      <td>
-        <p class='text-center'><%= link_to '', game_path(game), class: 'icon-eye-open' %></p>
-      </td>  
-    </tr> 
-  <% games_number = games_number + 1 %>  
-  <% if games_number % 6 == 0  %>          
-    </tbody></table></div>
-  <% end %>   
+      <tbody>  
+        <% @games[6 * index.. 6 * index + 5].sort_by(&:number).each do |game| %>   
+          <tr>      
+            <td class='img-right'>
+              <%= image_tag("#{game.team1.img}.png")%>
+            </td>
+            <td class='label-center'>
+              <%= label_tag game.team1.name %>
+            </td>
+            <td>      
+            <%= game.score_team1%> 
+            X  
+            <%= game.score_team2 %> 
+            </td>
+            <td class='label-center'>        
+              <%= label_tag game.team2.name %>
+            </td>
+            <td class='img-left'>
+              <%= image_tag("#{game.team2.img}.png")%>
+            </td>
+            <td>
+              <p class='text-center'><%= link_to '', game_path(game), class: 'icon-eye-open' %></p>
+            </td>  
+          </tr>
+        <% end %> 
+      </tbody>
+    </table> 
+  </div>     
 <% end %>
 
 <div class="pull-left group-table" align='center'> 
-  <h3>Campeão</h3> 
-  
+  <h3>Campeão</h3>  
   <h4 class="muted">-</h4>
   <h3>Artilheiro</h3>
-  <h4 class="muted">-</h4>
-  
+  <h4 class="muted">-</h4>  
 </div>  

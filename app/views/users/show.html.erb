@@ -1,38 +1,37 @@
 <h2 class='text-center'><%= @user.name %></h2>
-<% games_number = 0%>
-<% @user.bets.each do |bet| %>
-  <% if games_number % 6 == 0  %>
-    <div class="pull-left group-table"><table class='table'>  
+<% (0..7).each do |index| %>
+  <div class="pull-left group-table">
+    <table class='table'>  
       <thead>
         <tr>
-          <th colspan="5"><h4 class="text-center">Grupo <%= bet.game.team1.group %></h4></th>
+          <th colspan="5"><h4 class="text-center">Grupo <%= @user.bets[6 * index].game.team1.group %></h4></th>
         </tr>
       </thead>
       <tbody>               
-  <% end %> 
-    <tr>      
-      <td class='img-right'>
-        <%= image_tag("#{bet.game.team1.img}.png")%>
-      </td>
-      <td class='label-center'>
-        <%= label_tag bet.game.team1.name %>
-      </td>
-      <td>      
-      <%= bet.score_team1%> 
-      X  
-      <%= bet.score_team2 %> 
-      </td>
-      <td class='label-center'>        
-        <%= label_tag bet.game.team2.name %>
-      </td>
-      <td class='img-left'>
-        <%= image_tag("#{bet.game.team2.img}.png")%>
-      </td>     
-    </tr> 
-  <% games_number = games_number + 1 %>  
-  <% if games_number % 6 == 0  %>          
-    </tbody></table></div>
-  <% end %>   
+        <% @user.bets[6 * index.. 6 * index + 5].sort_by(&:game_number).each do |bet| %>   
+          <tr>      
+            <td class='img-right'>
+              <%= image_tag("#{bet.game.team1.img}.png")%>
+            </td>
+            <td class='label-center'>
+              <%= label_tag bet.game.team1.name %>
+            </td>
+            <td>      
+            <%= bet.score_team1%> 
+            X  
+            <%= bet.score_team2 %> 
+            </td>
+            <td class='label-center'>        
+              <%= label_tag bet.game.team2.name %>
+            </td>
+            <td class='img-left'>
+              <%= image_tag("#{bet.game.team2.img}.png")%>
+            </td>     
+          </tr> 
+        <% end %>
+      </tbody>
+    </table>
+  </div>    
 <% end %>
 
 <div class="pull-left group-table" align='center'> 

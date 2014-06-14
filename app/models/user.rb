@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def self.sorted	
-		User.all.sort_by(&:current_points).reverse
+	def self.sorted			
+		User.all.sort_by{|user| [user.current_points, user.correct_scores]}.reverse
 	end
 
 	def self.build_chart

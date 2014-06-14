@@ -14,6 +14,10 @@ class Bet < ActiveRecord::Base
 		score_team1 < score_team2
 	end
 
+	def game_number
+		game.number
+	end
+
 	def self.initialize_bets stage
 		result = []
 		Game.stage(stage).each do |game|
