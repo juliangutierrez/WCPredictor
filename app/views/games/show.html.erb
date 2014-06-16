@@ -3,7 +3,7 @@
     <tr>
       <th><p>Nome</p></th>
       <th colspan='5'><p class='text-center'>Aposta</p></th>
-      <th><p class='text-center'>Data</p></th>
+      
     </tr>
   </thead>
   <tbody>
@@ -27,7 +27,7 @@
 			  <td class='img-left'>
 			    <%= image_tag("#{@game.team2.img}.png")%>
 			  </td>
-			  <td><%= user.bets.find_by_game_id(@game.id).updated_at.strftime("%m, %b %Y - %H:%M") %></td>    
+			  
 			</tr>
 		<% end %>      
   </tbody>
