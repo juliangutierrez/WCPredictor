@@ -8,6 +8,7 @@
 			<th><p class='text-center'>%</p></th>
 			<th><p class='text-center'>Placares</p></th>
 			<th><p class='text-center'>%</p></th>
+			<th><p class='text-center'>Erros</p></th>
 			<th><p class='text-center'>Ver aposta</p></th>
 		</tr>
 	</thead>
@@ -23,6 +24,7 @@
 				<td><p class='text-center'><%= (user.correct_outcomes_percent * 100).round 2 %>%</p></td>
 				<td><p class='text-center'><%= user.correct_scores %></p></td>
 				<td><p class='text-center'><%= (user.correct_scores_percent * 100).round 2 %>%</p></td>
+				<td><p class='text-center'><%= Game.done_count - user.correct_outcomes %></p></td>
 				<td>
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
 				</td>
@@ -43,7 +45,7 @@
 </li>
 	  <li><%= link_to @games[Game.done_count + 2].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 2 > Game.count %>
 </li>
-		<li><%= link_to @games[Game.done_count + 3].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 3 > Game.count %>
+		<li><%= link_to @games[Game.done_count + 3].label, game_path(@games[Game.done_count + 3]) unless Game.done_count + 3 > Game.count %>
 </li>
 	</ul>
 	
@@ -80,13 +82,17 @@ $(function () {
             },
 						
 						tooltip: {
-						            enabled: false
+						          valueSuffix: 'pts'
 						        },
             xAxis: {
             		title: {
                     text: 'Jogos decorridos'
                 },
-                categories: <%= Game.rounds %>
+                categories: <%= Game.done.map(&:label).unshift('Início').to_json.html_safe %>,
+                
+                labels: { 
+									rotation: -60
+								}
             },
             yAxis: {
                 title: {

@@ -48,15 +48,12 @@ class Game < ActiveRecord::Base
   def self.stage stage_number
 		Game.where(stage: stage_number) 
 	end
-
-	def self.rounds		
-		Game.all.inject([1]) do |result, game|
-		  result << result.last + 1 if game.done?
-		  result
-		end
-	end
-
+	
 	def self.done_count
 		Game.all.map(&:done?).count {|game| game}
+	end
+
+	def self.done
+		Game.all.map {|g| g if g.done?}.compact
 	end
 end
