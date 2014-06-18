@@ -66,6 +66,6 @@ class Game < ActiveRecord::Base
 	end
 
 	def self.previous_games		 
-		Game.done.sort_by(&:updated_at)[Game.done_count - 2..Game.done_count]
+		Game.done.sort_by(&:updated_at)[Game.done_count - 4..Game.done_count]
 	end
 end
