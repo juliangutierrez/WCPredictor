@@ -40,21 +40,16 @@
 <div class='text-center'>
 	<h5><strong>Próximos Jogos:</strong></h5>
 	<ul class="inline">
-	  <li><%= link_to @games[Game.done_count].label, game_path(@games[Game.done_count]) unless Game.done_count > Game.count %></li>
-	  <li><%= link_to @games[Game.done_count + 1].label, game_path(@games[Game.done_count + 1]) unless Game.done_count + 1 > Game.count %>
-</li>
-	  <li><%= link_to @games[Game.done_count + 2].label, game_path(@games[Game.done_count + 2]) unless Game.done_count + 2 > Game.count %>
-</li>
-		<li><%= link_to @games[Game.done_count + 3].label, game_path(@games[Game.done_count + 3]) unless Game.done_count + 3 > Game.count %>
-</li>
+		<% @next_games.each do |next_game| %>		
+	  	<li><%= link_to next_game.label, game_path(next_game) %></li>
+	  <% end %>
 	</ul>
 	
 	<h5><strong>Últimos Jogos:</strong></h5>
 	<ul class="inline">
-	  <li><%= link_to @games[Game.done_count - 1].label, game_path(@games[Game.done_count - 1])%></li>
-	  <li><%= link_to @games[Game.done_count - 2].label, game_path(@games[Game.done_count - 2])%></li>
-	  <li><%= link_to @games[Game.done_count - 3].label, game_path(@games[Game.done_count - 3])%></li>
-	  <li><%= link_to @games[Game.done_count - 4].label, game_path(@games[Game.done_count - 4])%></li>
+	  <% @previous_games.each do |previous_game| %>		
+	  	<li><%= link_to previous_game.label, game_path(previous_game) %></li>
+	  <% end %>
 	</ul>
 </div>
 <br>
@@ -88,7 +83,7 @@ $(function () {
             		title: {
                     text: 'Jogos decorridos'
                 },
-                categories: <%= Game.done.map(&:label).unshift('Início').to_json.html_safe %>,
+                categories: <%= @games.map(&:label).unshift('Início').to_json.html_safe %>,
                 
                 labels: { 
 									rotation: -60

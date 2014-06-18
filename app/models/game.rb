@@ -56,4 +56,16 @@ class Game < ActiveRecord::Base
 	def self.done
 		Game.all.map {|g| g if g.done?}.compact
 	end
+
+	def self.not_done
+		Game.all.map {|g| g unless g.done?}.compact
+	end
+
+	def self.next_games
+		Game.not_done.sort_by(&:number)[Game.done_count..Game.done_count + 3]
+	end
+
+	def self.previous_games		 
+		Game.done.sort_by(&:updated_at)[Game.done_count - 2..Game.done_count - 1]
+	end
 end

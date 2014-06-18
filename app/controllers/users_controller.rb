@@ -2,7 +2,9 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.sorted
-		@games = Game.order :number
+		@games = Game.done.sort_by(&:updated_at)
+		@next_games = Game.next_games
+		@previous_games = Game.previous_games
 		@series = User.build_chart_series
 	end
 
