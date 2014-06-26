@@ -10,6 +10,7 @@
 			<th><p class='text-center'>%</p></th>
 			<th><p class='text-center'>Erros</p></th>
 			<th><p class='text-center'>Ver aposta</p></th>
+			<th><p class='text-center'>Próxima fase</p></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,6 +28,9 @@
 				<td><p class='text-center'><%= Game.done_count - user.correct_outcomes %></p></td>
 				<td>
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
+				</td>
+				<td>
+					<p class='text-center'><%= link_to '', stage2_user_path(user), class: 'icon-edit' %></p>
 				</td>
 			</tr>
 		<% end %>

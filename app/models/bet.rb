@@ -18,12 +18,17 @@ class Bet < ActiveRecord::Base
 		game.number
 	end
 
-	def self.initialize_bets stage
-		result = []
-		Game.stage(stage).each do |game|
-			result << Bet.new(game: game, score_team1: 0, score_team2: 0)
-		end
-		result
+	def stage
+		game.stage
+	end
+
+	def self.initialize_bets stage	
+		Game.stage(stage).map do |game|
+			Bet.new(game: game, score_team1: 0, score_team2: 0)
+		end		
 	end
 	
+	def self.stage stage
+		select { |bet| bet.stage == stage }
+	end
 end

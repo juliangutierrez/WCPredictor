@@ -33,6 +33,11 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def stage2
+		@user = User.find(params[:id])
+		@user.initialize_stage 2		
+	end
+
 	private
   def user_params  	
     params.require(:user).permit(:id, :name, :champion_id, :striker, bets_attributes: [:id, :score_team1, :score_team2, :game_id])    

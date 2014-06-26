@@ -1,0 +1,42 @@
+<%= form_for :user, url: user_path(@user), method: :patch, html: {class: "form-inline"} do |user_form| %>
+  <table class='table table-center'>  
+    <thead>
+      <tr>
+        <th colspan="5"><h4 class="text-center">Oitavas de final</h4></th>
+      </tr>
+    </thead>
+    <tbody>       
+      <%= user_form.hidden_field(:id)%>    
+      <% @user.bets_by_stage(2).each do |bet| %>   
+        <tr>
+          <%= user_form.fields_for "bets_attributes[]", bet do |bets_form| %>
+            <%= bets_form.hidden_field(:id, value: bet.id)%>               
+            <%= bets_form.hidden_field(:game_id, value: bet.game.id)%>
+            <td class='img-right'>
+              <%= image_tag("#{bet.game.team1.img}.png")%>
+            </td>
+            <td class='label-center'>
+              <%= bets_form.label bet.game.team1.name %>
+            </td>
+            <td>
+            <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score'} %> 
+            X  
+            <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score'} %>
+            </td>
+            <td class='label-center'>
+              <%= bets_form.label bet.game.team2.name %>
+            </td>
+            <td class='img-left'>
+              <%= image_tag("#{bet.game.team2.img}.png")%>
+            </td>       
+          <% end %>
+        </tr>      
+      <% end %>     
+    </tbody>
+  </table>
+  <br>
+  <div align='center'>    
+    <%= user_form.submit 'Salvar', class: "btn btn-primary large-button" %>
+  </div>
+<% end %>
+

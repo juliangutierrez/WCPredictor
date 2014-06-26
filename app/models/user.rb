@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
 	validates :name, presence: true
-	# validates :team, presence: true
-	# validates :striker, presence: true
-
+	
 	has_many :bets, dependent: :destroy
 	belongs_to :champion, class_name: 'Team'
 	accepts_nested_attributes_for :bets
@@ -51,6 +49,14 @@ class User < ActiveRecord::Base
 		correct_scores.to_f / Game.done_count
 	end
 
+	def initialize_stage stage
+		bets = self.bets + Bet.initialize_bets(stage)
+	end
+
+	def bets_by_stage stage
+		bets.stage stage
+	end
+
 	def self.update_points game
 		User.all.each do |user|
 			user.update_points game
@@ -64,5 +70,4 @@ class User < ActiveRecord::Base
 	def self.build_chart_series
 		User.all.inject([]){|result, user| result << {name: user.name, data: user.points} } 
 	end
-	
 end
