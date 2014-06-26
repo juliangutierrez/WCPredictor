@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 	end
 
 	def initialize_stage stage
-		bets = self.bets + Bet.initialize_bets(stage)
+		self.bets = self.bets + Bet.initialize_bets(stage)
 	end
 
 	def bets_by_stage stage

@@ -34,8 +34,8 @@ class UsersController < ApplicationController
 	end
 
 	def stage2
-		@user = User.find(params[:id])
-		@user.initialize_stage 2		
+		@user = User.find(params[:id])		
+		@user.initialize_stage 2
 	end
 
 	private
