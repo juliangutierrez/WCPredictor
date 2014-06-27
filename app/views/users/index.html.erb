@@ -73,44 +73,46 @@
 
 
 <script type="text/javascript">
-$(function () {
-        $('.modal-body').highcharts({
+	$( "a.btn" ).on( "click",  setTimeout(function () {
+
+
+    $('.modal-body').highcharts({
+        title: {
+            text: 'Desempenho dos jogadores',
+            x: -20 //center
+        },
+				
+				tooltip: {
+				          valueSuffix: 'pts'
+				        },
+        xAxis: {
+        		title: {
+                text: 'Jogos decorridos'
+            },
+            categories: <%= @games.map(&:label).unshift('Início').to_json.html_safe %>,
+            
+            labels: { 
+							rotation: -60
+						}
+        },
+        yAxis: {
             title: {
-                text: 'Desempenho dos jogadores',
-                x: -20 //center
+                text: 'Pontos'
             },
-						
-						tooltip: {
-						          valueSuffix: 'pts'
-						        },
-            xAxis: {
-            		title: {
-                    text: 'Jogos decorridos'
-                },
-                categories: <%= @games.map(&:label).unshift('Início').to_json.html_safe %>,
-                
-                labels: { 
-									rotation: -60
-								}
-            },
-            yAxis: {
-                title: {
-                    text: 'Pontos'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }],
-                floor: 0
-            },            
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: <%= @series.to_json.html_safe %>
-        });
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }],
+            floor: 0
+        },            
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: <%= @series.to_json.html_safe %>
     });
+  }, 1500));
 </script>
