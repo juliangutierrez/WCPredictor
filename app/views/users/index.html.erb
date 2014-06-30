@@ -30,7 +30,7 @@
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
 				</td>
 				<td>
-					<p class='text-center'><span class='<%= 'icon-edit' unless user.has_draws?(2) %>'></span><%= link_to_if user.has_draws?(2), '', stage2_user_path(user), class: 'icon-edit' %></p>
+					<p class='text-center'><span class='icon-edit'></span></p>
 				</td>
 			</tr>
 		<% end %>
