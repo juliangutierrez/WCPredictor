@@ -39,6 +39,6 @@ class UsersController < ApplicationController
 
 	private
   def user_params  	
-    params.require(:user).permit(:id, :name, :champion_id, :striker, bets_attributes: [:id, :score_team1, :score_team2, :game_id])    
+    params.require(:user).permit(:id, :name, :champion_id, :striker, bets_attributes: [:id, :score_team1, :score_team2, :game_id, :winner_id])    
   end
 end

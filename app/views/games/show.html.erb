@@ -27,7 +27,12 @@
 			  <td class='img-left'>
 			    <%= image_tag("#{@game.team2.img}.png")%>
 			  </td>
-			  
+			  <% if @game.stage != 1 && user.bets.find_by_game_id(@game.id).draw? %>
+			  	<td>
+			  		<i class="icon-star"></i>
+			  		<strong><%= user.bets.find_by_game_id(@game.id).winner_by_penalties.name %></strong>
+			  	</td>
+			  <% end %>			  
 			</tr>
 		<% end %>      
   </tbody>

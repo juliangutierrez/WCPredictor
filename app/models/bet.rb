@@ -1,5 +1,8 @@
 class Bet < ActiveRecord::Base
 	belongs_to :game
+	belongs_to :winner_by_penalties, class_name: 'Team', foreign_key: 'winner_id'
+		
+	after_save :nulify_winner_by_penalties
 	
 	def winner
 		return game.team1 if team1_won?
@@ -24,6 +27,10 @@ class Bet < ActiveRecord::Base
 
 	def stage
 		game.stage
+	end
+
+	def nulify_winner_by_penalties
+		self.winner_by_penalties = nil unless draw?
 	end
 
 	def self.initialize_bets stage	

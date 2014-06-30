@@ -8,7 +8,7 @@
     <tbody>       
       <%= user_form.hidden_field(:id)%>    
       <% @user.bets_by_stage(2).each do |bet| %>   
-        <tr>
+        <tr class='row'>
           <%= user_form.fields_for "bets_attributes[]", bet do |bets_form| %>
             <%= bets_form.hidden_field(:id, value: bet.id)%>               
             <%= bets_form.hidden_field(:game_id, value: bet.game.id)%>
@@ -19,16 +19,19 @@
               <%= bets_form.label bet.game.team1.name %>
             </td>
             <td>
-            <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score'} %> 
+            <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score', disabled: true} %> 
             X  
-            <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score'} %>
+            <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score', disabled: true} %>
             </td>
             <td class='label-center'>
               <%= bets_form.label bet.game.team2.name %>
             </td>
             <td class='img-left'>
               <%= image_tag("#{bet.game.team2.img}.png")%>
-            </td>       
+            </td>
+            <td class= 'winner <%= 'hide' unless bet.draw? %>'>
+              <%= bets_form.select :winner_id, bet.game.teams.collect {|team| [ team.name, team.id ] }, {}, {class: 'span2'}  %>
+            </td>     
           <% end %>
         </tr>      
       <% end %>     
@@ -39,4 +42,14 @@
     <%= user_form.submit 'Salvar', class: "btn btn-primary large-button" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $( 'td .select-score' ).on( "change", function () {    
+    if ($(this).parent().children('.select-score').first().val() == $(this).parent().children('.select-score').last().val()){       
+      $(this).parents('.row').children('.winner').removeClass('hide')
+    } else {
+      $(this).parents('.row').children('.winner').addClass('hide')
+    };
+  });
+</script>
 

@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
 	belongs_to :team1, class_name: 'Team', foreign_key: 'team1_id'
 	belongs_to :team2, class_name: 'Team', foreign_key: 'team2_id'
+	belongs_to :winner_by_penalties, class_name: 'Team', foreign_key: 'winner_id'
 
 	after_update :update_users_points
 
@@ -41,6 +42,10 @@ class Game < ActiveRecord::Base
 		actual_score_team2.present?? actual_score_team2 : '-'
 	end
 	
+	def teams
+		[team1, team2]	
+	end
+
 	def self.groups_stage
 		result = []
 		Team::GROUPS.each do |group|

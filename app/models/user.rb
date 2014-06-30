@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
 		bets.stage stage
 	end
 
+	def has_draws? stage
+		bets_by_stage(stage).any? { |bet| bet.draw? }
+	end
+
 	def self.update_points game
 		User.all.each do |user|
 			user.update_points game
