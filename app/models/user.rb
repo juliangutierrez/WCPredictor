@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 	end
 
 	def has_draws? stage
-		bets_by_stage(stage).any? { |bet| bet.draw? }
+		bets_by_stage(stage).any? { |bet| bet.draw? && !bet.game.done? }
 	end
 
 	def self.update_points game
