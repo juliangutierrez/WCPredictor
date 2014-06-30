@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 	def init_points
 		points << 0
 	end
-	
+
 	def update_points game
 		bet = bets.where(game: game).first
 		new_points = points.last
@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
 			new_points = new_points + 2
 			self.correct_scores = self.correct_scores + 1
 		end
+		if game.stage != 1 && game.draw? && guess_winner?(bet, game)
+			new_points = new_points + 2
+			self.correct_scores = self.correct_scores + 1 unless bet.draw?
+		end
+
 		points << new_points
 
 		save
@@ -34,11 +39,15 @@ class User < ActiveRecord::Base
 	end
 
 	def guess_outcome?(bet, game)
-		(bet.winner == game.winner ||  bet.winner.nil? && game.winner.nil?)? true : false
+		(bet.winner == game.winner ||  bet.draw? && game.draw?)? true : false
 	end
 
 	def guess_score?(bet, game)
 		(bet.score_team1 == game.actual_score_team1 && bet.score_team2 == game.actual_score_team2)? true : false
+	end
+
+	def guess_winner?(bet, game)
+		bet.winner_by_penalties == game.winner_by_penalties || bet.winner == game.winner_by_penalties
 	end
 
 	def correct_outcomes_percent

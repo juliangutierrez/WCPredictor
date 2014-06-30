@@ -6,6 +6,10 @@ class Bet < ActiveRecord::Base
 		return game.team2 if team2_won?		
 	end
 
+	def draw?
+		score_team1 == score_team2
+	end
+
 	def team1_won?
 		score_team1 > score_team2
 	end

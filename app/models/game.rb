@@ -21,6 +21,10 @@ class Game < ActiveRecord::Base
 		return team2 if team2_won?		
 	end
 
+	def draw?
+		actual_score_team1 == actual_score_team2
+	end
+
 	def team1_won?
 		actual_score_team1 > actual_score_team2
 	end
