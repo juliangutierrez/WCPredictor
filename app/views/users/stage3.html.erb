@@ -19,9 +19,9 @@
               <%= bets_form.label bet.game.team1.name %>
             </td>
             <td>
-            <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score', disabled: true} %> 
+            <%= bets_form.select :score_team1, (0..9).to_a, {}, {class: 'select-score'} %> 
             X  
-            <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score', disabled: true} %>
+            <%= bets_form.select :score_team2, (0..9).to_a, {}, {class: 'select-score'} %>
             </td>
             <td class='label-center'>
               <%= bets_form.label bet.game.team2.name %>

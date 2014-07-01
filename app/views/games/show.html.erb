@@ -30,7 +30,7 @@
 			  <% if @game.stage != 1 && user.bets.find_by_game_id(@game.id).draw? %>
 			  	<td>
 			  		<i class="icon-star"></i>
-			  		<strong><%= user.bets.find_by_game_id(@game.id).winner_by_penalties.name %></strong>
+			  		<strong><%= user.bets.find_by_game_id(@game.id).winner_by_penalties.name unless user.bets.find_by_game_id(@game.id).winner_by_penalties.nil?%></strong>
 			  	</td>
 			  <% end %>			  
 			</tr>
