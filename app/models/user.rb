@@ -29,12 +29,12 @@ class User < ActiveRecord::Base
 		
 		if game.stage != 1 && game.draw? && guess_winner?(bet, game)
 			new_points = new_points + 2
-			self.correct_scores = self.correct_scores + 1 unless bet.draw?
+			self.correct_outcomes = self.correct_outcomes + 1 unless bet.draw?
 		end
 
 		if game.stage != 1 && bet.draw? && !game.draw? && guess_winner?(bet, game)
 			new_points = new_points + 2
-			self.correct_scores = self.correct_scores + 1
+			self.correct_outcomes = self.correct_outcomes + 1
 		end
 
 		points << new_points
@@ -55,7 +55,11 @@ class User < ActiveRecord::Base
 	end
 
 	def guess_winner?(bet, game)
-		bet.winner_by_penalties == game.winner_by_penalties || bet.winner_by_penalties == game.winner || bet.winner == game.winner_by_penalties
+		guess_winner_by_penalties?(bet, game) || bet.winner_by_penalties == game.winner
+	end
+
+	def guess_winner_by_penalties?(bet, game)
+		game.winner_by_penalties.present? && (bet.winner_by_penalties == game.winner_by_penalties || bet.winner == game.winner_by_penalties)
 	end
 
 	def correct_outcomes_percent

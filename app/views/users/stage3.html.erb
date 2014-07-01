@@ -2,12 +2,12 @@
   <table class='table table-center'>  
     <thead>
       <tr>
-        <th colspan="5"><h4 class="text-center">Oitavas de final</h4></th>
+        <th colspan="5"><h4 class="text-center">Quartas de final</h4></th>
       </tr>
     </thead>
     <tbody>       
       <%= user_form.hidden_field(:id)%>    
-      <% @user.bets_by_stage(2).each do |bet| %>   
+      <% @user.bets_by_stage(3).each do |bet| %>   
         <tr class='row'>
           <%= user_form.fields_for "bets_attributes[]", bet do |bets_form| %>
             <%= bets_form.hidden_field(:id, value: bet.id)%>               

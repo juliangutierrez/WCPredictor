@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'users#index'  
   resources :users , except: [ :edit, :new ] do
     member do
-      get 'stage2'
+      get 'stage3'
     end
   end
 
