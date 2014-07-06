@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def stage3
+	def stage4
 		@user = User.find(params[:id])		
 	end
 
