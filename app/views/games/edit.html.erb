@@ -1,6 +1,5 @@
 <%= form_for :game, url: game_path(@game), method: :patch do |game_form| %>
-<div class="pull-left group-table">
-	<table class='table'>
+	<table class='table table-center'>
 		<tr>		  
 	  	<%= game_form.hidden_field(:id)%>
 	    <td class='img-right'>
@@ -19,12 +18,24 @@
 	    </td>
 	    <td class='img-left'>
 	      <%= image_tag("#{@game.team2.img}.png")%>
-	    </td>	    
+	    </td>
+	     <td class= 'winner'>
+        <%= game_form.select :winner_id, @game.teams.collect {|team| [ team.name, team.id ] }, {}, {class: 'span2'}  %>
+      </td>      
 		</tr>
 	</table>
-	
-</div>
-<p>
+
+<div align='center'> 
   <%= game_form.submit 'Salvar', class: "btn btn-primary large-button" %>
-</p>
+</div>
 <% end %>
+
+<script type="text/javascript">
+  $( 'td .select-score' ).on( "change", function () {    
+    if ($(this).parent().children('.select-score').first().val() == $(this).parent().children('.select-score').last().val()){       
+      $(this).parents('.row').children('.winner').removeClass('hide')
+    } else {
+      $(this).parents('.row').children('.winner').addClass('hide')
+    };
+  });
+</script>

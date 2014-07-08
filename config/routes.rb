@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   root 'users#index'  
-  resources :users , except: [ :edit, :new ] do
-    member do
-      get 'stage4'
-    end
-  end
+  resources :users , except: [ :edit, :new ] 
 
   resources :games do
     collection do
