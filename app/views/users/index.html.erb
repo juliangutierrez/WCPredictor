@@ -30,7 +30,7 @@
 					<p class='text-center'><%= link_to '', user_path(user), class: 'icon-eye-open' %></p>
 				</td>
 				<td>
-					<p class='text-center'><i class='icon-edit'></i></p>
+					<p class='text-center'><%= link_to '', stage5_user_path(user), class: 'icon-edit' %></p>
 				</td>
 			</tr>
 		<% end %>
@@ -114,5 +114,5 @@
         },
         series: <%= @series.to_json.html_safe %>
     });
-  }, 1500));
+  }, 3000));
 </script>
