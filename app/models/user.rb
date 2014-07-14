@@ -34,10 +34,9 @@ class User < ActiveRecord::Base
 				new_points = new_points + 2
 				self.correct_outcomes = self.correct_outcomes + 1
 			end
-		elsif game.stage != 1 && bet.draw?
-			if bet.winner_by_penalties == game.winner
-				new_points = new_points + 2
-				self.correct_outcomes = self.correct_outcomes + 1
+		elsif game.stage != 1 && bet.draw? && bet.winner_by_penalties == game.winner
+			new_points = new_points + 2
+			self.correct_outcomes = self.correct_outcomes + 1			
 		end
 
 		points << new_points
