@@ -27,14 +27,17 @@ class User < ActiveRecord::Base
 			self.correct_scores = self.correct_scores + 1
 		end
 		
-		if game.stage != 1 && game.draw? && guess_winner?(bet, game)
-			new_points = new_points + 2
-			self.correct_outcomes = self.correct_outcomes + 1 unless bet.draw?
-		end
-
-		if game.stage != 1 && bet.draw? && !game.draw? && guess_winner?(bet, game)
-			new_points = new_points + 2
-			self.correct_outcomes = self.correct_outcomes + 1
+		if game.stage != 1 && game.draw?
+			if bet.draw?
+				new_points = new_points + 2 if bet.winner_by_penalties == game.winner_by_penalties
+			elsif game.winner_by_penalties == bet.winner
+				new_points = new_points + 2
+				self.correct_outcomes = self.correct_outcomes + 1
+			end
+		elsif game.stage != 1 && bet.draw?
+			if bet.winner_by_penalties == game.winner
+				new_points = new_points + 2
+				self.correct_outcomes = self.correct_outcomes + 1
 		end
 
 		points << new_points
@@ -52,14 +55,6 @@ class User < ActiveRecord::Base
 
 	def guess_score?(bet, game)
 		(bet.score_team1 == game.actual_score_team1 && bet.score_team2 == game.actual_score_team2)? true : false
-	end
-
-	def guess_winner?(bet, game)
-		guess_winner_by_penalties?(bet, game) || bet.winner_by_penalties == game.winner
-	end
-
-	def guess_winner_by_penalties?(bet, game)
-		game.winner_by_penalties.present? && (bet.winner_by_penalties == game.winner_by_penalties || bet.winner == game.winner_by_penalties)
 	end
 
 	def correct_outcomes_percent
